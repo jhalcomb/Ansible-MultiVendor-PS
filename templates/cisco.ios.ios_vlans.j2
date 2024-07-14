@@ -1,0 +1,11 @@
+{# CISCO IOS HAS 1 SPACE OF INDENTATION #}
+{% for name, vid in vlans.items() %}
+vlan {{ vid }}
+ name {{ name | upper }}
+interface Vlan{{ vid }}
+ description {{ name | upper }} VLAN
+ ip address 10.0.{{ vid }}.{{ inventory_hostname[1:] }} 255.255.255.0
+{% endfor %}
+{# CISCO IOS PROMPTS FOR CONFORMATION DURING FILE TRANSFERS, SO DISABLE THIS #}
+{# THIS LETS US USE COPY RUN START FOR ALL DEVICE TYPES #}
+file prompt quiet

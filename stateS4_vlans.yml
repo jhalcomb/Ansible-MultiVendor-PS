@@ -1,0 +1,28 @@
+- get_vlans:
+    '1':
+      interfaces:
+      - Ethernet1
+      - Ethernet4
+      - Ethernet5
+      - Ethernet6
+      - Ethernet7
+      - Ethernet8
+      name: default
+    '10':
+      interfaces:
+      - Cpu
+      - Ethernet2
+      - Ethernet3
+      name: MANAGEMENT
+    '11':
+      interfaces:
+      - Cpu
+      name: ENGINEERING
+    '12':
+      interfaces:
+      - Cpu
+      name: SALES
+    '13':
+      interfaces:
+      - Cpu
+      name: FINANCE

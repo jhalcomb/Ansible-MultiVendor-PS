@@ -1,0 +1,42 @@
+---
+- name: "Configure VLANS and SVI's on switches"
+  hosts: "all"
+  collections:
+    - "ansible.netcommon"
+  tasks:
+
+    - name: "Store template path var per device type"
+      set_fact:
+        template_path: "templates/{{ ansible_network_os }}_vlans.j2"
+
+    - name: "Print Template path"
+      debug:
+        msg: "{{template_path}}"
+
+    - name: "Apply config updates from j2 templates"
+      cli_config:
+        config: "{{ lookup('template', template_path) }}"
+      register: "vlan_updates"
+      notify: "changes_occurred"
+
+  handlers:
+    # Arista supports on-box diff - yeilds a 'diff' key in the response if a change is made.
+    # S4#diff running-config startup-config
+    - name: "Print on-box diff when changes occur"
+      listen: "changes_occurred"
+      debug:
+        msg: "{{ vlan_updates['diff'].split('\n') }}"
+      when: "'diff' in vlan_updates"
+
+    # Cisco IOS and NXOS do not support on-box diff - yields a 'commands' key in the response since no on-box diff if a change is made.
+    - name: "Print commands issued when changes happen (no on-box diff)"
+      listen: "changes_occurred"
+      debug:
+        var: "vlan_updates.commands"
+      when: "'commands' in vlan_updates"
+
+    # Save changes
+    - name: "Save Configuration when changes occur"
+      listen: "changes_occurred"
+      cli_command:
+        command: "copy running-config startup-config"
