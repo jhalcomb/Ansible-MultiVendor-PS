@@ -1,0 +1,26 @@
+---
+- name: "Validate VLANS with NAPALM"
+  hosts: "all"
+  tasks:
+
+    - name: "Ensure '/compliance' directory exists"
+      ansible.builtin.file:
+        path: "./compliance"
+        state: "directory"
+      delegate_to: "localhost"
+      run_once: true
+
+    - name: "Check VLANS on switches against the state file"
+      napalm.napalm.validate:
+        validation_file: "./state/{{ inventory_hostname }}_vlans.yml"
+      register: "vlan_report"
+      failed_when: "'compliance_report' not in vlan_report"
+
+    - name: "Print Compliance"
+      ansible.builtin.debug:
+        var: "vlan_report.compliance_report.complies"
+
+    - name: "Store VLAN detailed compliance report"
+      ansible.builtin.copy:
+        content: "{{ vlan_report | to_nice_json(indent=2) }}"
+        dest: "./compliance/{{ inventory_hostname }}_vlans.json"

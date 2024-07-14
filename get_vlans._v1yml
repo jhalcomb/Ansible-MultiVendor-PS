@@ -17,12 +17,20 @@
           timeout: 15
       register: "raw_vlans"
 
+    - name: "Print"
+      ansible.builtin.debug:
+        msg: "{{ raw_vlans }}"
+
     - name: "Restructure raw VLANs into proper validation format"
       ansible.builtin.set_fact:
         reformed_vlans:
           - get_vlans: "{{ raw_vlans.ansible_facts.napalm_vlans }}"
 
+#    - name: "Print"
+#      ansible.builtin.debug:
+#        msg: "{{reformed_vlans}}"
+
     - name: "Generate validation file based on current state"
       ansible.builtin.copy:
         content: "{{ reformed_vlans | to_nice_yaml(indent=2) }}"
-        dest: "{{ playbook_dir }}/state{{ inventory_hostname }}_vlans.yml"
+        dest: "{{ playbook_dir }}/state/{{ inventory_hostname }}_vlans.yml"
