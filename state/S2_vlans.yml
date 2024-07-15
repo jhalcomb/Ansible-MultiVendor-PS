@@ -1,6 +1,7 @@
 - get_vlans:
     '1':
       interfaces:
+        _mode: strict
         list:
         - GigabitEthernet0/0
         - GigabitEthernet0/2
@@ -12,6 +13,7 @@
       name: default
     '10':
       interfaces:
+        _mode: strict
         list:
         - GigabitEthernet0/1
         - GigabitEthernet0/2
@@ -19,41 +21,48 @@
       name: MANAGEMENT
     '1002':
       interfaces:
+        _mode: strict
         list:
         - GigabitEthernet0/2
         - GigabitEthernet0/3
       name: fddi-default
     '1003':
       interfaces:
+        _mode: strict
         list:
         - GigabitEthernet0/2
         - GigabitEthernet0/3
       name: token-ring-default
     '1004':
       interfaces:
+        _mode: strict
         list:
         - GigabitEthernet0/2
         - GigabitEthernet0/3
       name: fddinet-default
     '1005':
       interfaces:
+        _mode: strict
         list:
         - GigabitEthernet0/2
         - GigabitEthernet0/3
       name: trnet-default
     '11':
       interfaces:
+        _mode: strict
         list:
         - GigabitEthernet0/3
       name: ENGINEERING
     '12':
       interfaces:
+        _mode: strict
         list:
         - GigabitEthernet0/2
         - GigabitEthernet0/3
       name: SALES
     '13':
       interfaces:
+        _mode: strict
         list:
         - GigabitEthernet0/2
         - GigabitEthernet0/3

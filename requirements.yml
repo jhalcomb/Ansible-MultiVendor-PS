@@ -5,3 +5,4 @@ collections:
   - "cisco.nxos"
   - "arista.eos"
   - "napalm.napalm"
+  - "netbox.netbox"

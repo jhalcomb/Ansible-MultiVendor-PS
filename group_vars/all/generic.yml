@@ -1,2 +1,3 @@
 ---
 ansible_connection: "ansible.netcommon.network_cli"
+strict_mode: true

@@ -1,9 +1,9 @@
 - get_vlans:
     '1':
       interfaces:
+        _mode: strict
         list:
         - Ethernet1/1
-        - Ethernet1/2
         - Ethernet1/3
         - Ethernet1/4
         - Ethernet1/5
@@ -69,21 +69,25 @@
       name: default
     '10':
       interfaces:
+        _mode: strict
         list:
         - Ethernet1/2
       name: MANAGEMENT
     '11':
       interfaces:
+        _mode: strict
         list:
         - Ethernet1/2
       name: ENGINEERING
     '12':
       interfaces:
+        _mode: strict
         list:
         - Ethernet1/2
       name: SALES
     '13':
       interfaces:
+        _mode: strict
         list:
         - Ethernet1/2
       name: FINANCE

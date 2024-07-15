@@ -1,0 +1,38 @@
+---
+netbox_url: "10.0.10.40:8080"
+netbox_token: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          65623236336534336530663962616434326633373639643831643536393836653866353734333732
+          3734376136303863323538386630326462313265633735330a636461613733313934363535393166
+          66653563653765643364396662646165306562616132386132353839386536663135356362653139
+          3334636231616630640a366239323564326266346137653061663737313034336339623361653830
+          30383936396563623666373634336461383363633861373437333732383566353962613138643931
+          3164376332333133326365613932396333653565666637346661
+location:
+  region: "Americas"
+  hq: "Globo HQ"
+interfaces:
+  lan: "GigabitEthernet1"
+  wan: "GigabitEthernet4"
+vlan_list:
+  - name: "Management"
+    prefix: "10.0.10.0/24"
+    vid: 10
+  - name: "Engineering"
+    prefix: "10.0.11.0/24"
+    vid: 11
+  - name: "Sales"
+    prefix: "10.0.12.0/24"
+    vid: 12
+  - name: "Finance"
+    prefix: "10.0.13.0/24"
+    vid: 13
+ethernet_cables:
+  - a: {device: "R1", name: "{{ interfaces.lan }}"}
+    b: {device: "S2", name: "GigabitEthernet0/1"}
+  - a: {device: "S2", name: "GigabitEthernet0/2"}
+    b: {device: "S3", name: "Ethernet1/2"}
+  - a: {device: "S2", name: "GigabitEthernet0/3"}
+    b: {device: "S4", name: "Ethernet3"}
+  - a: {device: "S3", name: "Ethernet1/1"}
+    b: {device: "S4", name: "Ethernet1"}

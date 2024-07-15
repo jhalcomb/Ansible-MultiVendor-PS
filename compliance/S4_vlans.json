@@ -1,14 +1,44 @@
 {
   "changed": false,
   "compliance_report": {
-    "complies": true,
+    "complies": false,
     "get_vlans": {
-      "complies": true,
+      "complies": false,
       "extra": [],
       "missing": [],
       "present": {
         "1": {
-          "complies": true,
+          "complies": false,
+          "diff": {
+            "complies": false,
+            "extra": [],
+            "missing": [],
+            "present": {
+              "interfaces": {
+                "complies": false,
+                "diff": {
+                  "complies": false,
+                  "extra": [
+                    "Ethernet3"
+                  ],
+                  "missing": [],
+                  "present": [
+                    "Ethernet1",
+                    "Ethernet4",
+                    "Ethernet5",
+                    "Ethernet6",
+                    "Ethernet7",
+                    "Ethernet8"
+                  ]
+                },
+                "nested": true
+              },
+              "name": {
+                "complies": true,
+                "nested": false
+              }
+            }
+          },
           "nested": true
         },
         "10": {
@@ -32,5 +62,6 @@
     "skipped": []
   },
   "failed": false,
-  "failed_when_result": false
+  "failed_when_result": false,
+  "msg": "Device does not comply with policy"
 }
