@@ -1,0 +1,14 @@
+---
+- name: "Build Globomantics network in netbox"
+  hosts: "netbox_servers"
+  tasks:
+
+    - name: "Iteratively include all task lists"
+      include_tasks: "tasks/{{ taskname }}.yml"
+      loop:
+        - "org"
+        - "device"
+        - "ipam"
+        - "circuit"
+      loop_control:
+        loop_var: "taskname"
