@@ -1,0 +1,11 @@
+---
+plugin: "netbox.netbox.nb_inventory"
+api_endpoint: "http://10.0.10.40:8080"
+token: "5d80051cda79e03b4843deaf5dd63df7d55c96d0"
+config_context: false
+group_by:
+  - "device_roles"
+device_query_filters:
+  - has_primary_ip: "true"
+compose:
+  ansible_network_os: "platform.slug"
